@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Task_Manager"
+        xmlns:local="clr-namespace:Task_Manager" 
+        xmlns:vm="clr-namespace:Task_Manager.ViewModels"
         mc:Ignorable="d"
         Title="" 
         Height="600" Width="900"
@@ -12,6 +13,9 @@
         Background="Transparent"
         AllowsTransparency="True">
 
+    <Window.DataContext>
+        <vm:TreeViewVM />
+    </Window.DataContext>
     <Border CornerRadius="30">
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
@@ -71,20 +75,24 @@
             <Border CornerRadius="0, 30, 30, 0" Grid.Row="1">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7" >
-                        <GradientStop  Color="{StaticResource secondaryBackColor1}" Offset="0" />
-                        <GradientStop  Color="{StaticResource secondaryBackColor2}" Offset="1" />
+                        <GradientStop  Color="{StaticResource primaryBackColor3}" Offset="0" />
+                        <GradientStop  Color="{StaticResource secondaryBackColor3}" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
 
                 <TreeView x:Name="treeView" Background="Transparent" BorderBrush="Transparent" ItemsSource="{Binding ItemsCollection}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding SubCollection}">
-                            <TextBlock Text="{Binding ItemName}" FontSize="25"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Icon}" Margin="5" Width="20" Height="23" /> 
+                                <!--<Image Source="../Resources/Icons/folder.jpg" Margin="3" Width="20" Height="20" />-->
+                                <TextBlock Text="{Binding Name}" Foreground="{StaticResource panelActiveColor}"  FontSize="25"/>
+                            </StackPanel>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
             </Border>
-   
+            
 
         </Grid>
 

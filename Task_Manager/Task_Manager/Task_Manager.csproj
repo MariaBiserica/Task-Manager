@@ -55,11 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Themes\MenuButtonTheme.xaml">
+    <Page Include="Resources\Themes\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\UIColors.xaml">
+    <Page Include="Resources\Themes\UIColors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -71,6 +71,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\TaskCollection.cs" />
+    <Compile Include="ViewModels\IconConverterVM.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\TreeViewVM.cs" />
@@ -108,5 +110,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\folder.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
