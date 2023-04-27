@@ -72,20 +72,19 @@
                              Style="{StaticResource MenuButtonTheme}"/>
             </StackPanel>
 
-            <Border CornerRadius="0, 30, 30, 0" Grid.Row="1">
-                <Border.Background>
+            <Border CornerRadius="0, 30, 30, 0" Grid.Row="1" Background="White">
+                <!--<Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7" >
                         <GradientStop  Color="{StaticResource primaryBackColor3}" Offset="0" />
                         <GradientStop  Color="{StaticResource secondaryBackColor3}" Offset="1" />
                     </LinearGradientBrush>
-                </Border.Background>
+                </Border.Background>-->
 
                 <TreeView x:Name="treeView" Background="Transparent" BorderBrush="Transparent" ItemsSource="{Binding ItemsCollection}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding SubCollection}">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding Icon}" Margin="5" Width="20" Height="23" /> 
-                                <!--<Image Source="../Resources/Icons/folder.jpg" Margin="3" Width="20" Height="20" />-->
+                                <Image Source="{Binding Icon}" Margin="5" Width="30" Height="30" /> 
                                 <TextBlock Text="{Binding Name}" Foreground="{StaticResource panelActiveColor}"  FontSize="25"/>
                             </StackPanel>
                         </HierarchicalDataTemplate>
