@@ -8,7 +8,7 @@ using Task_Manager.Core;
 
 namespace Task_Manager.Models
 {
-    internal class TDL : ObservableObject
+    public class TDL : ObservableObject
     {
         public TDL()
         {

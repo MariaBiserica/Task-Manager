@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using Task_Manager.Core;
 using Task_Manager.Models;
 using Task = Task_Manager.Models.Task;
@@ -14,40 +15,10 @@ namespace Task_Manager.ViewModels
     {
         public TreeViewVM()
         {
-            /*ItemsCollection = new ObservableCollection<TDL>();
-            ItemsCollection.Add(new TDL
-            {
-                Name = "a",
-                SubCollection = new ObservableCollection<TDL>()
-                {
-                    new TDL { Name = "b", SubCollection = new ObservableCollection<TDL>()
-                    {
-                        new TDL() { Name = "d", SubCollection = new ObservableCollection<TDL>() },
-                        new TDL() { Name = "e", SubCollection = new ObservableCollection<TDL>() }
-                    }
-                    },
-                    new TDL { Name = "c", SubCollection = new ObservableCollection<TDL>()
-                    {
-                        new TDL() { Name = "f", SubCollection = new ObservableCollection<TDL>() },
-                        new TDL() { Name = "g", SubCollection = new ObservableCollection<TDL>() }
-                    }
-                    }
-                }
-            });
-            ItemsCollection.Add(new TDL()
-            {
-                Name = "h",
-                SubCollection = new ObservableCollection<TDL>()
-                {
-                    new TDL { Name = "i", SubCollection = new ObservableCollection<TDL>()
-                    {
-                        new TDL() { Name = "j", SubCollection = new ObservableCollection<TDL>() }
-                    }
-                    }
-                }
-            });*/
+            Data = new DataModel();
+            Data.ItemsCollection = new ObservableCollection<TDL>();
 
-            ItemsCollection = new ObservableCollection<TDL>();
+            //ItemsCollection = new ObservableCollection<TDL>();
 
             TDL tdl1 = new TDL
             {
@@ -79,11 +50,12 @@ namespace Task_Manager.ViewModels
                 }
             };
 
-            ItemsCollection.Add(tdl1);
-            ItemsCollection.Add(tdl2);
+            Data.ItemsCollection.Add(tdl1);
+            Data.ItemsCollection.Add(tdl2);
         }
-        
-        public ObservableCollection<TDL> ItemsCollection { get; set; }
+
+        public DataModel Data { get; set; }
+        //public ObservableCollection<TDL> ItemsCollection { get; set; }
         private TDL selectedItem;
         public TDL SelectedItem
         {

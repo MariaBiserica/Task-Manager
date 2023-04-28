@@ -44,7 +44,7 @@
                    FontSize="22"
                    Margin="20, 0, 0, 0"/>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <!--<StackPanel Grid.Column="1" Orientation="Horizontal">
                 <RadioButton Content="File"
                              Height="50"
                              Foreground="White"
@@ -70,16 +70,55 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"/>
-            </StackPanel>
-
-            <Border CornerRadius="0, 30, 30, 0" Grid.Row="1" Background="White">
-                <!--<Border.Background>
+            </StackPanel>-->
+            <Menu Grid.Column="1" Background="Transparent" FontWeight="ExtraBold" FontSize="20">
+                <Menu.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7" >
-                        <GradientStop  Color="{StaticResource primaryBackColor3}" Offset="0" />
+                        <GradientStop  Color="{StaticResource winBorderColor2}" Offset="0" />
                         <GradientStop  Color="{StaticResource secondaryBackColor3}" Offset="1" />
                     </LinearGradientBrush>
-                </Border.Background>-->
+                </Menu.Foreground>
+                <MenuItem Header="File">
+                    <MenuItem Header="Open Database"/>
+                    <MenuItem Header="New Database"/>
+                    <MenuItem Header="Archive Database"/>
+                    <MenuItem Header="Exit"/>
+                </MenuItem>
+                <MenuItem Header="TDL">
+                    <MenuItem Header="Add Root TDL"/>
+                    <MenuItem Header="Add Sub-TDL"/>
+                    <MenuItem Header="Edit"/>
+                    <MenuItem Header="Delete"/>
+                    <MenuItem Header="Move Up"/>
+                    <MenuItem Header="Move Down"/>
+                    <MenuItem Header="Change Path"/>
+                </MenuItem>
+                <MenuItem Header="Task">
+                    <MenuItem Header="Add"/>
+                    <MenuItem Header="Edit"/>
+                    <MenuItem Header="Delete"/>
+                    <MenuItem Header="Set Done"/>
+                    <MenuItem Header="Move Up"/>
+                    <MenuItem Header="Move Down"/>
+                    <MenuItem Header="Manage Category"/>
+                    <MenuItem Header="Find Task"/>
+                </MenuItem>
+                <MenuItem Header="Task">
+                    <MenuItem Header="Sort"/>
+                    <MenuItem Header="Filter"/>
+                    <MenuItem Header="Statistics"/>
+                </MenuItem>
+                <MenuItem Header="Task">
+                    <MenuItem Header="About"/>
+                </MenuItem>
+                <!--<MenuItem Header="">
+                    <MenuItem.Icon>
+                        <Image Source="../Resources/Icons/power.png" Width="16" Height="16" />
+                    </MenuItem.Icon>
+                </MenuItem>-->
+            </Menu>
 
+            <Border CornerRadius="0, 30, 30, 0" Grid.Row="1" Background="White">
                 <TreeView x:Name="treeView" Background="Transparent" BorderBrush="Transparent" ItemsSource="{Binding ItemsCollection}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding SubCollection}">

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Task_Manager.Core
 {
-    internal class ObservableObject : INotifyPropertyChanged
+    public class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

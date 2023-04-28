@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Themes\MenuItemTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Themes\UIColors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -71,6 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\TaskCollection.cs" />
     <Compile Include="ViewModels\IconConverterVM.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
@@ -120,6 +125,12 @@
     <Resource Include="Resources\Icons\folder2.jpg" />
     <Resource Include="Resources\Icons\search1.jpg" />
     <Resource Include="Resources\Icons\settings1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\power.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\power.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
