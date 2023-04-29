@@ -53,9 +53,9 @@
                 </Menu.Foreground>
                 <MenuItem Header="File">
                     <MenuItem Header="Open Database" Command="{Binding LoadDataCommand}"/>
-                    <MenuItem Header="New Database"/>
+                    <MenuItem Header="New Database" Command="{Binding NewDatabaseCommand}"/>
                     <MenuItem Header="Archive Database" Command="{Binding SaveDataCommand}"/>
-                    <MenuItem Header="Exit"/>
+                    <MenuItem Header="Exit" Command="{Binding CloseDatabaseCommand}"/>
                 </MenuItem>
                 <MenuItem Header="TDL">
                     <MenuItem Header="Add Root TDL"/>
