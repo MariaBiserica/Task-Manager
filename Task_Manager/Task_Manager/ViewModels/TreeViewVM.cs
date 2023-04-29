@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Markup;
+using System.Xml.Linq;
 using Task_Manager.Core;
 using Task_Manager.Models;
 using Task = Task_Manager.Models.Task;
@@ -15,47 +17,10 @@ namespace Task_Manager.ViewModels
     {
         public TreeViewVM()
         {
-            Data = new DataModel();
-            Data.ItemsCollection = new ObservableCollection<TDL>();
-
-            //ItemsCollection = new ObservableCollection<TDL>();
-
-            TDL tdl1 = new TDL
-            {
-                Name = "TDL 1",
-                Icon = "../Resources/Icons/folder1.jpg",
-                SubCollection = new ObservableCollection<TDL>()
-                {
-                    new TDL { Name = "Sub-TDL 1", Icon = "../Resources/Icons/book1.jpg", 
-                        SubCollection = new ObservableCollection<TDL>()
-                        {
-                            new TDL() { Name = "Sub-Sub-TDL 1", Icon = "../Resources/Icons/search1.jpg" },
-                            new TDL() { Name = "Sub-Sub-TDL 2", Icon = "../Resources/Icons/settings1.jpg"}
-                        } 
-                    },
-                    new TDL { Name = "Sub-TDL 2", Icon = "../Resources/Icons/book2.jpg"},
-                    new Task { Name = "Task 1", Icon = "../Resources/Icons/checklist1.jpg" },
-                    new Task { Name = "Task 2", Icon = "../Resources/Icons/checklist2.jpg"}
-                }
-            };
-
-            TDL tdl2 = new TDL
-            {
-                Name = "TDL 2",
-                Icon = "../Resources/Icons/folder2.jpg",
-                SubCollection = new ObservableCollection<TDL>()
-                {
-                    new Task { Name = "Task 3", Icon = "../Resources/Icons/docs1.jpg" },
-                    new Task { Name = "Task 4", Icon = "../Resources/Icons/computer1.jpg"}
-                }
-            };
-
-            Data.ItemsCollection.Add(tdl1);
-            Data.ItemsCollection.Add(tdl2);
+            Data = null;
         }
-
-        public DataModel Data { get; set; }
-        //public ObservableCollection<TDL> ItemsCollection { get; set; }
+        public DataModelVM Data { get; set; }
+        
         private TDL selectedItem;
         public TDL SelectedItem
         {
@@ -69,6 +34,61 @@ namespace Task_Manager.ViewModels
                 NotifyPropertyChanged("SelectedItem");
             }
         }
+        
+        public ICommand LoadDataCommand => new RelayCommand(obj => LoadData());
+
+        public ICommand SaveDataCommand => new RelayCommand(obj => SaveData());
+
+        private void LoadData()
+        {
+            Data = new DataModelVM();
+            Data.LoadDataModel();
+            NotifyPropertyChanged("Data");
+        }
+
+        private void SaveData()
+        {
+            Data.SaveDataModel();
+        }
+
     }
+        //public TreeViewVM()
+        //{
+        //    Data = new DataModel();
+        //    Data.ItemsCollection = new ObservableCollection<TDL>();
+
+        //    TDL tdl1 = new TDL
+        //    {
+        //        Name = "TDL 1",
+        //        Icon = "../Resources/Icons/folder1.jpg",
+        //        SubCollection = new ObservableCollection<TDL>()
+        //        {
+        //            new TDL { Name = "Sub-TDL 1", Icon = "../Resources/Icons/book1.jpg", 
+        //                SubCollection = new ObservableCollection<TDL>()
+        //                {
+        //                    new TDL() { Name = "Sub-Sub-TDL 1", Icon = "../Resources/Icons/search1.jpg" },
+        //                    new TDL() { Name = "Sub-Sub-TDL 2", Icon = "../Resources/Icons/settings1.jpg"}
+        //                } 
+        //            },
+        //            new TDL { Name = "Sub-TDL 2", Icon = "../Resources/Icons/book2.jpg"},
+        //            new Task { Name = "Task 1", Icon = "../Resources/Icons/checklist1.jpg" },
+        //            new Task { Name = "Task 2", Icon = "../Resources/Icons/checklist2.jpg"}
+        //        }
+        //    };
+
+        //    TDL tdl2 = new TDL
+        //    {
+        //        Name = "TDL 2",
+        //        Icon = "../Resources/Icons/folder2.jpg",
+        //        SubCollection = new ObservableCollection<TDL>()
+        //        {
+        //            new Task { Name = "Task 3", Icon = "../Resources/Icons/docs1.jpg" },
+        //            new Task { Name = "Task 4", Icon = "../Resources/Icons/computer1.jpg"}
+        //        }
+        //    };
+
+        //    Data.ItemsCollection.Add(tdl1);
+        //    Data.ItemsCollection.Add(tdl2);
+        //}
 }
 

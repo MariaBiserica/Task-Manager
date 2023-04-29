@@ -77,7 +77,8 @@
     </Compile>
     <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\TaskCollection.cs" />
-    <Compile Include="ViewModels\IconConverterVM.cs" />
+    <Compile Include="Resources\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\DataModelVM.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\TreeViewVM.cs" />

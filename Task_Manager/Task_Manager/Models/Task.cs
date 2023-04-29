@@ -7,7 +7,7 @@ using Task_Manager.Core;
 
 namespace Task_Manager.Models
 {
-    internal class Task : TDL
+    public class Task : TDL
     {
         private string _description;
         public string Description

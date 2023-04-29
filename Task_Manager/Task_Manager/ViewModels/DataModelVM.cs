@@ -14,15 +14,15 @@ namespace Task_Manager.ViewModels
 {
     public class DataModelVM
     {
-        public ObservableCollection<TDL> ItemsCollection { get; }
+        public ObservableCollection<TDL> ItemsCollection { get; set; }
 
-        public DataModelVM()
-        {
-            var dataModel = LoadDataModel();
-            ItemsCollection = new ObservableCollection<TDL>(dataModel.ItemsCollection);
-        }
+        //public DataModelVM()
+        //{
+        //    var dataModel = LoadDataModel();
+        //    ItemsCollection = new ObservableCollection<TDL>(dataModel.ItemsCollection);
+        //}
 
-        private DataModel LoadDataModel()
+        public DataModel LoadDataModel()
         {
             DataModel dataModel;
             XmlSerializer serializer = new XmlSerializer(typeof(DataModel));
@@ -31,13 +31,13 @@ namespace Task_Manager.ViewModels
                 using (var stream = new FileStream("data.xml", FileMode.Open))
                 {
                     dataModel = (DataModel)serializer.Deserialize(stream);
+                    ItemsCollection = new ObservableCollection<TDL>(dataModel.ItemsCollection);
                 }
                 MessageBox.Show("Data loaded successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (FileNotFoundException ex)
             {
                 dataModel = new DataModel();
-                MessageBox.Show($"An error occurred while loading data. Error message: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return dataModel;
         }
@@ -49,7 +49,6 @@ namespace Task_Manager.ViewModels
             {
                 using (var stream = new FileStream("data.xml", FileMode.Create))
                 {
-                    //serializer.Serialize(stream, new DataModel { ItemsCollection = ItemsCollection.ToList() });
                     serializer.Serialize(stream, new DataModel { ItemsCollection = new ObservableCollection<TDL>(ItemsCollection.ToList()) });
                 }
                 MessageBox.Show("Data saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);

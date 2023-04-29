@@ -44,33 +44,6 @@
                    FontSize="22"
                    Margin="20, 0, 0, 0"/>
 
-            <!--<StackPanel Grid.Column="1" Orientation="Horizontal">
-                <RadioButton Content="File"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="TDL"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="Task"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="View"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="Help"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-            </StackPanel>-->
             <Menu Grid.Column="1" Background="Transparent" FontWeight="ExtraBold" FontSize="20">
                 <Menu.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7" >
@@ -79,9 +52,9 @@
                     </LinearGradientBrush>
                 </Menu.Foreground>
                 <MenuItem Header="File">
-                    <MenuItem Header="Open Database"/>
+                    <MenuItem Header="Open Database" Command="{Binding LoadDataCommand}"/>
                     <MenuItem Header="New Database"/>
-                    <MenuItem Header="Archive Database"/>
+                    <MenuItem Header="Archive Database" Command="{Binding SaveDataCommand}"/>
                     <MenuItem Header="Exit"/>
                 </MenuItem>
                 <MenuItem Header="TDL">
@@ -103,12 +76,12 @@
                     <MenuItem Header="Manage Category"/>
                     <MenuItem Header="Find Task"/>
                 </MenuItem>
-                <MenuItem Header="Task">
+                <MenuItem Header="View">
                     <MenuItem Header="Sort"/>
                     <MenuItem Header="Filter"/>
                     <MenuItem Header="Statistics"/>
                 </MenuItem>
-                <MenuItem Header="Task">
+                <MenuItem Header="Help">
                     <MenuItem Header="About"/>
                 </MenuItem>
                 <!--<MenuItem Header="">
@@ -119,7 +92,7 @@
             </Menu>
 
             <Border CornerRadius="0, 30, 30, 0" Grid.Row="1" Background="White">
-                <TreeView x:Name="treeView" Background="Transparent" BorderBrush="Transparent" ItemsSource="{Binding ItemsCollection}">
+                <TreeView x:Name="treeView" Background="Transparent" BorderBrush="Transparent" ItemsSource="{Binding Data.ItemsCollection}" Visibility="{Binding Data, Converter={StaticResource NullToVisibilityConverter}}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding SubCollection}">
                             <StackPanel Orientation="Horizontal">
