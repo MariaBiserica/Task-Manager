@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Task_Manager.Models;
+using Task_Manager.ViewModels;
 
 namespace Task_Manager
 {
@@ -20,9 +22,23 @@ namespace Task_Manager
     /// </summary>
     public partial class MainView : Window
     {
+        private TreeViewVM treeViewVM;
         public MainView()
         {
             InitializeComponent();
+
+            // create instance of TreeViewVM and set as DataContext
+            treeViewVM = new TreeViewVM();
+            DataContext = treeViewVM;
+        }
+        
+        private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            // get selected TDL from TreeView.SelectedItem
+            TDL selectedTDL = (TDL)treeView.SelectedItem;
+
+            // set SelectedTDL property in TreeViewVM
+            treeViewVM.SelectedTDL = selectedTDL;
         }
     }
 }

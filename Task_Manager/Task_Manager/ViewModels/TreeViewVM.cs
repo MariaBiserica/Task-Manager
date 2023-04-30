@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Xml.Linq;
@@ -33,10 +34,13 @@ namespace Task_Manager.ViewModels
             {
                 return selectedTDL;
             }
-            set
+            set 
             {
-                selectedTDL = value;
-                NotifyPropertyChanged("SelectedTDL");
+                if (selectedTDL != value)
+                {
+                    selectedTDL = value;
+                    NotifyPropertyChanged("SelectedTDL");
+                }
             }
         }
 
@@ -77,6 +81,7 @@ namespace Task_Manager.ViewModels
             Data = null;
             NotifyPropertyChanged("Data");
         }
+
     }
 }
 
