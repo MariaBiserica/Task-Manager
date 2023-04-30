@@ -13,9 +13,12 @@ namespace Task_Manager.Models
         public TDL()
         {
             SubCollection = new ObservableCollection<TDL>();
+            Tasks = new ObservableCollection<Task>();
         }
         
         public ObservableCollection<TDL> SubCollection { get; set; }
+
+        public ObservableCollection<Task> Tasks { get; set; }
 
         private string _name;
         public string Name

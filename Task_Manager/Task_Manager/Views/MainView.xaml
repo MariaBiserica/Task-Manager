@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager" 
+        xmlns:m="clr-namespace:Task_Manager.Models" 
         xmlns:vm="clr-namespace:Task_Manager.ViewModels"
         mc:Ignorable="d"
         Title="" 
@@ -52,9 +53,9 @@
                     </LinearGradientBrush>
                 </Menu.Foreground>
                 <MenuItem Header="File">
-                    <MenuItem Header="Open Database" Command="{Binding LoadDataCommand}"/>
+                    <MenuItem Header="Open Database" Command="{Binding LoadDatabaseCommand}"/>
                     <MenuItem Header="New Database" Command="{Binding NewDatabaseCommand}"/>
-                    <MenuItem Header="Archive Database" Command="{Binding SaveDataCommand}"/>
+                    <MenuItem Header="Archive Database" Command="{Binding SaveDatabaseCommand}"/>
                     <MenuItem Header="Exit" Command="{Binding CloseDatabaseCommand}"/>
                 </MenuItem>
                 <MenuItem Header="TDL">
@@ -84,29 +85,44 @@
                 <MenuItem Header="Help">
                     <MenuItem Header="About"/>
                 </MenuItem>
-                <!--<MenuItem Header="">
-                    <MenuItem.Icon>
-                        <Image Source="../Resources/Icons/power.png" Width="16" Height="16" />
-                    </MenuItem.Icon>
-                </MenuItem>-->
             </Menu>
 
             <Border CornerRadius="0, 30, 30, 0" Grid.Row="1" Background="White">
-                <TreeView x:Name="treeView" Background="Transparent" BorderBrush="Transparent" ItemsSource="{Binding Data.ItemsCollection}" Visibility="{Binding Data, Converter={StaticResource NullToVisibilityConverter}}">
+                <TreeView x:Name="treeView" Background="Transparent" BorderBrush="Transparent" 
+                          ItemsSource="{Binding Data.ItemsCollection}" 
+                          Visibility="{Binding Data, Converter={StaticResource NullToVisibilityConverter}}"
+                          >
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding SubCollection}">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding Icon}" Margin="5" Width="30" Height="30" /> 
+                                <Image Source="{Binding Icon}" Margin="5" Width="30" Height="30" />
                                 <TextBlock Text="{Binding Name}" Foreground="{StaticResource panelActiveColor}"  FontSize="25"/>
                             </StackPanel>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
             </Border>
-            
+
+            <Grid Grid.Column="1" Grid.Row="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Tasks:" Foreground="White" FontSize="20" FontWeight="Bold"/>
+
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False"
+                          ItemsSource="{Binding Tasks}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"/>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                        <DataGridTextColumn Header="Due Date" Binding="{Binding Deadline}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
 
         </Grid>
-
-       
+        
     </Border>
 </Window>
