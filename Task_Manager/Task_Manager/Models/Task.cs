@@ -7,8 +7,22 @@ using Task_Manager.Core;
 
 namespace Task_Manager.Models
 {
-    public class Task : TDL
+    public class Task : ObservableObject
     {
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        
         private string _description;
         public string Description
         {
