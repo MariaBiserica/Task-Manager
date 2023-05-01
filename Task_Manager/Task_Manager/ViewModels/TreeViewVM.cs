@@ -44,6 +44,34 @@ namespace Task_Manager.ViewModels
             }
         }
 
+        private string selectedTDLName;
+        public string SelectedTDLName
+        {
+            get
+            {
+                return selectedTDLName;
+            }
+            set
+            {
+                selectedTDLName = value;
+                NotifyPropertyChanged("SelectedTDLName");
+            }
+        }
+
+        private Task selectedTask;
+        public Task SelectedTask
+        {
+            get
+            {
+                return selectedTask;
+            }
+            set
+            {
+                selectedTask = value;
+                NotifyPropertyChanged("SelectedTask");
+            }
+        }
+
         public ICommand NewDatabaseCommand { get; set; }
         
         public ICommand LoadDatabaseCommand => new RelayCommand(obj => LoadData());
@@ -79,9 +107,9 @@ namespace Task_Manager.ViewModels
         private void CloseDatabase()
         {
             Data = null;
+            SelectedTDL = null;
             NotifyPropertyChanged("Data");
         }
-
     }
 }
 

@@ -12,8 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
 using Task_Manager.Models;
 using Task_Manager.ViewModels;
+using Task = Task_Manager.Models.Task;
 
 namespace Task_Manager
 {
@@ -31,14 +33,26 @@ namespace Task_Manager
             treeViewVM = new TreeViewVM();
             DataContext = treeViewVM;
         }
-        
-        private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             // get selected TDL from TreeView.SelectedItem
             TDL selectedTDL = (TDL)treeView.SelectedItem;
 
             // set SelectedTDL property in TreeViewVM
-            treeViewVM.SelectedTDL = selectedTDL;
+            if (selectedTDL != null)
+            {
+                treeViewVM.SelectedTDL = selectedTDL;
+                treeViewVM.SelectedTDLName = "Viewing '" + selectedTDL.Name + "' to do list.";
+            }
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dataGrid.SelectedItem is Task selectedTask)
+            {
+                treeViewVM.SelectedTask = selectedTask;
+            }
         }
     }
 }
