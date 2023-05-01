@@ -75,14 +75,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\CloseDatabaseCommand.cs" />
+    <Compile Include="Commands\LoadDatabaseCommand.cs" />
     <Compile Include="Commands\NewDatabaseCommand.cs" />
+    <Compile Include="Commands\SaveDatabaseCommand.cs" />
+    <Compile Include="Commands\SortCommand.cs" />
     <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\TaskCollection.cs" />
+    <Compile Include="Resources\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Resources\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="ViewModels\DataModelVM.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="ViewModels\TreeViewVM.cs" />
+    <Compile Include="ViewModels\MainViewVM.cs" />
+    <Compile Include="ViewModels\StatisticsVM.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -14,7 +14,7 @@
         AllowsTransparency="True">
 
     <Window.DataContext>
-        <vm:TreeViewVM />
+        <vm:MainViewVM />
     </Window.DataContext>
     <Border CornerRadius="30">
         <Border.Background>
@@ -34,6 +34,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
@@ -77,9 +78,9 @@
                     <MenuItem Header="Find Task"/>
                 </MenuItem>
                 <MenuItem Header="View">
-                    <MenuItem Header="Sort"/>
+                    <MenuItem Header="Sort" Command="{Binding SortCommand}"/>
                     <MenuItem Header="Filter"/>
-                    <MenuItem Header="Statistics"/>
+                    <MenuItem Header="Statistics" Command="{Binding StatisticsCommand}" IsCheckable="True" IsChecked="{Binding IsStatisticsPanelVisible}"/>
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Header="About"/>
@@ -131,6 +132,22 @@
                          Visibility="{Binding Data, Converter={StaticResource NullToVisibilityConverter}}"/>
             </Grid>
 
+            <Border CornerRadius="0, 30, 30, 30" Grid.Row="3"
+                    Visibility="{Binding IsStatisticsPanelVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                        <GradientStop  Color="{StaticResource primaryBackColor3}" Offset="0" />
+                        <GradientStop  Color="{StaticResource secondaryBackColor3}" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel Margin="5">
+                    <TextBlock Text="{Binding Statistics.NumTasksToday}" Foreground="Blue"/>
+                    <TextBlock Text="{Binding Statistics.NumTasksTomorrow}" Foreground="Blue"/>
+                    <TextBlock Text="{Binding Statistics.NumTasksDelayed}" Foreground="Blue"/>
+                    <TextBlock Text="{Binding Statistics.NumTasksCompleted}" Foreground="Blue"/>
+                    <TextBlock Text="{Binding Statistics.NumTasksPending}" Foreground="Blue"/>
+                </StackPanel>
+            </Border>
         </Grid>
         
     </Border>

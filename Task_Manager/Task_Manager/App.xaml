@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Themes/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="Resources/Themes/UIColors.xaml"/>

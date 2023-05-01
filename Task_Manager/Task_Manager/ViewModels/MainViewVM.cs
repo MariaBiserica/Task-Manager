@@ -18,12 +18,18 @@ using Task = Task_Manager.Models.Task;
 
 namespace Task_Manager.ViewModels
 {
-    internal class TreeViewVM : ObservableObject
+    public class MainViewVM : ObservableObject
     {
-        public TreeViewVM()
+        public MainViewVM()
         {
             Data = null;
+            IsStatisticsPanelVisible = false;
+            
             NewDatabaseCommand = new NewDatabaseCommand();
+            LoadDatabaseCommand = new LoadDatabaseCommand(this);
+            SaveDatabaseCommand = new SaveDatabaseCommand(this);
+            CloseDatabaseCommand = new CloseDatabaseCommand(this);
+            SortCommand = new SortCommand();
         }
         public DataModelVM Data { get; set; }
 
@@ -72,44 +78,46 @@ namespace Task_Manager.ViewModels
             }
         }
 
+        private bool isStatisticsPanelVisible;
+        public bool IsStatisticsPanelVisible
+        {
+            get { return isStatisticsPanelVisible; }
+            set
+            {
+                if (isStatisticsPanelVisible != value)
+                {
+                    isStatisticsPanelVisible = value;
+                    NotifyPropertyChanged("IsStatisticsPanelVisible");
+                }
+            }
+        }
+
+        private StatisticsVM statistics;
+        public StatisticsVM Statistics
+        {
+            get { return statistics; }
+            set
+            {
+                if (statistics != value)
+                {
+                    statistics = value;
+                    NotifyPropertyChanged("Statistics");
+                }
+            }
+        }
+
         public ICommand NewDatabaseCommand { get; set; }
+       
+        public ICommand LoadDatabaseCommand { get; set; }
+
+        public ICommand SaveDatabaseCommand { get; set; }
+
+        public ICommand CloseDatabaseCommand { get; set; }
+
+        public ICommand SortCommand { get; set; }
         
-        public ICommand LoadDatabaseCommand => new RelayCommand(obj => LoadData());
+        public ICommand StatisticsCommand => new RelayCommand(obj => IsStatisticsPanelVisible = true);
 
-        public ICommand SaveDatabaseCommand => new RelayCommand(obj => SaveData());
-
-        public ICommand CloseDatabaseCommand => new RelayCommand(obj => CloseDatabase());
-
-        private void LoadData()
-        {
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
-            openFileDialog.Title = "Open data file";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                Data = new DataModelVM();
-                Data.LoadDataModel(openFileDialog.FileName);
-                NotifyPropertyChanged("Data");
-            }
-        }
-
-        private void SaveData()
-        {
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
-            saveFileDialog.Title = "Save data file";
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                Data.SaveDataModel(saveFileDialog.FileName);
-            }
-        }
-
-        private void CloseDatabase()
-        {
-            Data = null;
-            SelectedTDL = null;
-            NotifyPropertyChanged("Data");
-        }
     }
 }
 

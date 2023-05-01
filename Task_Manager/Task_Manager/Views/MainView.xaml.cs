@@ -24,13 +24,13 @@ namespace Task_Manager
     /// </summary>
     public partial class MainView : Window
     {
-        private TreeViewVM treeViewVM;
+        private MainViewVM treeViewVM;
         public MainView()
         {
             InitializeComponent();
 
             // create instance of TreeViewVM and set as DataContext
-            treeViewVM = new TreeViewVM();
+            treeViewVM = new MainViewVM();
             DataContext = treeViewVM;
         }
 
@@ -44,6 +44,7 @@ namespace Task_Manager
             {
                 treeViewVM.SelectedTDL = selectedTDL;
                 treeViewVM.SelectedTDLName = "Viewing '" + selectedTDL.Name + "' to do list.";
+                treeViewVM.Statistics = new StatisticsVM(treeViewVM.SelectedTDL); // initialize statistics
             }
         }
 
@@ -51,6 +52,10 @@ namespace Task_Manager
         {
             if (dataGrid.SelectedItem is Task selectedTask)
             {
+                if (selectedTask.Description == null)
+                {
+                    selectedTask.Description = "No description.";
+                }
                 treeViewVM.SelectedTask = selectedTask;
             }
         }
