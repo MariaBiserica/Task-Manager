@@ -30,6 +30,7 @@ namespace Task_Manager.Commands
         {
             _viewModel.Data = null;
             _viewModel.SelectedTDL = null;
+            _viewModel.IsStatisticsPanelVisible = false;
             _viewModel.NotifyPropertyChanged("Data");
         }
     }

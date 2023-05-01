@@ -30,6 +30,8 @@ namespace Task_Manager.ViewModels
             SaveDatabaseCommand = new SaveDatabaseCommand(this);
             CloseDatabaseCommand = new CloseDatabaseCommand(this);
             SortCommand = new SortCommand();
+            FilterCommand = new FilterCommand(this);
+            HelpCommand = new HelpCommand();
         }
         public DataModelVM Data { get; set; }
 
@@ -106,6 +108,42 @@ namespace Task_Manager.ViewModels
             }
         }
 
+        private ObservableCollection<Task> originalTasks;
+        public ObservableCollection<Task> OriginalTasks
+        {
+            get { return originalTasks; }
+            set
+            {
+                if (originalTasks != value)
+                {
+                    originalTasks = value;
+                    NotifyPropertyChanged("OriginalTasks");
+                }
+            }
+        }
+
+        private FilterType currentFilter;
+        public FilterType CurrentFilter
+        {
+            get { return currentFilter; }
+            set
+            {
+                currentFilter = value;
+                NotifyPropertyChanged("CurrentFilter");
+            }
+        }
+
+        public enum FilterType
+        {
+            Category,
+            Done,
+            Delayed,
+            Overdue,
+            DueFuture,
+            None
+        }
+
+
         public ICommand NewDatabaseCommand { get; set; }
        
         public ICommand LoadDatabaseCommand { get; set; }
@@ -115,8 +153,12 @@ namespace Task_Manager.ViewModels
         public ICommand CloseDatabaseCommand { get; set; }
 
         public ICommand SortCommand { get; set; }
-        
+
+        public ICommand FilterCommand { get; set; }
+
         public ICommand StatisticsCommand => new RelayCommand(obj => IsStatisticsPanelVisible = true);
+
+        public ICommand HelpCommand { get; set; }
 
     }
 }

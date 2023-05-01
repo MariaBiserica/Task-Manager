@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -76,6 +77,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\CloseDatabaseCommand.cs" />
+    <Compile Include="Commands\FilterCommand.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\LoadDatabaseCommand.cs" />
     <Compile Include="Commands\NewDatabaseCommand.cs" />
     <Compile Include="Commands\SaveDatabaseCommand.cs" />

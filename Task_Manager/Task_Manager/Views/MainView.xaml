@@ -79,11 +79,18 @@
                 </MenuItem>
                 <MenuItem Header="View">
                     <MenuItem Header="Sort" Command="{Binding SortCommand}"/>
-                    <MenuItem Header="Filter"/>
+                    <MenuItem Header="Filter">
+                        <MenuItem Header="Category" Command="{Binding FilterCommand}" CommandParameter="{x:Static vm:MainViewVM+FilterType.Category}" />
+                        <MenuItem Header="Done" Command="{Binding FilterCommand}" CommandParameter="{x:Static vm:MainViewVM+FilterType.Done}" />
+                        <MenuItem Header="Delayed" Command="{Binding FilterCommand}" CommandParameter="{x:Static vm:MainViewVM+FilterType.Delayed}" />
+                        <MenuItem Header="Overdue" Command="{Binding FilterCommand}" CommandParameter="{x:Static vm:MainViewVM+FilterType.Overdue}" />
+                        <MenuItem Header="Due Future" Command="{Binding FilterCommand}" CommandParameter="{x:Static vm:MainViewVM+FilterType.DueFuture}" />
+                        <MenuItem Header="Delete Filter" Command="{Binding FilterCommand}" CommandParameter="{x:Static vm:MainViewVM+FilterType.None}" />
+                    </MenuItem>
                     <MenuItem Header="Statistics" Command="{Binding StatisticsCommand}" IsCheckable="True" IsChecked="{Binding IsStatisticsPanelVisible}"/>
                 </MenuItem>
                 <MenuItem Header="Help">
-                    <MenuItem Header="About"/>
+                    <MenuItem Header="About" Command="{Binding HelpCommand}"/>
                 </MenuItem>
             </Menu>
 
@@ -122,6 +129,7 @@
                         <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"/>
                         <DataGridTextColumn Header="Type" Binding="{Binding Category}"/>
                         <DataGridTextColumn Header="Due Date" Binding="{Binding Deadline}"/>
+                        <DataGridTextColumn Header="Completion Date" Binding="{Binding CompletionDate}"/>
                     </DataGrid.Columns>
                 </DataGrid>
 

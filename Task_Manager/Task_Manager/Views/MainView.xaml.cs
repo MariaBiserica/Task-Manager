@@ -45,6 +45,7 @@ namespace Task_Manager
                 treeViewVM.SelectedTDL = selectedTDL;
                 treeViewVM.SelectedTDLName = "Viewing '" + selectedTDL.Name + "' to do list.";
                 treeViewVM.Statistics = new StatisticsVM(treeViewVM.SelectedTDL); // initialize statistics
+                treeViewVM.OriginalTasks = treeViewVM.SelectedTDL.Tasks; // initialize original tasks
             }
         }
 
