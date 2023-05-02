@@ -24,7 +24,8 @@ namespace Task_Manager.ViewModels
         {
             Data = null;
             IsStatisticsPanelVisible = false;
-            
+            IsDatePickerNeeded = false;
+
             NewDatabaseCommand = new NewDatabaseCommand();
             LoadDatabaseCommand = new LoadDatabaseCommand(this);
             SaveDatabaseCommand = new SaveDatabaseCommand(this);
@@ -35,6 +36,7 @@ namespace Task_Manager.ViewModels
             MoveUpCommand = new MoveUpCommand(this);
             MoveDownCommand = new MoveDownCommand(this);
             ChangePathCommand = new ChangePathCommand(this);
+            AddTaskCommand = new AddTaskCommand(this);
             SortCommand = new SortCommand();
             FilterCommand = new FilterCommand(this);
             HelpCommand = new HelpCommand();
@@ -149,6 +151,34 @@ namespace Task_Manager.ViewModels
             None
         }
 
+        private bool _isDatePickerNeeded;
+        public bool IsDatePickerNeeded
+        {
+            get { return _isDatePickerNeeded; }
+            set
+            {
+                if (_isDatePickerNeeded != value)
+                {
+                    _isDatePickerNeeded = value;
+                    NotifyPropertyChanged("IsDatePickerNeeded");
+                }
+            }
+        }
+
+        private DateTime _deadline;
+        public DateTime Deadline
+        {
+            get { return _deadline; }
+            set
+            {
+                if (_deadline != value)
+                {
+                    _deadline = value;
+                    NotifyPropertyChanged("Deadline");
+                }
+            }
+        }
+
 
         public ICommand NewDatabaseCommand { get; set; }
        
@@ -169,6 +199,8 @@ namespace Task_Manager.ViewModels
         public ICommand MoveDownCommand { get; set; }
 
         public ICommand ChangePathCommand { get; set; }
+
+        public ICommand AddTaskCommand { get; set; }
 
         public ICommand SortCommand { get; set; }
 

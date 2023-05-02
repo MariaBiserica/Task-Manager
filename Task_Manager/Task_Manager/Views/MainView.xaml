@@ -67,7 +67,7 @@
                     <MenuItem Header="Change Path" Command="{Binding ChangePathCommand}"/>
                 </MenuItem>
                 <MenuItem Header="Task">
-                    <MenuItem Header="Add"/>
+                    <MenuItem Header="Add" Command="{Binding AddTaskCommand}"/>
                     <MenuItem Header="Edit"/>
                     <MenuItem Header="Delete"/>
                     <MenuItem Header="Set Done"/>
@@ -155,6 +155,13 @@
                     <TextBlock Text="{Binding Statistics.NumTasksPending}" Foreground="Blue"/>
                 </StackPanel>
             </Border>
+
+            <DatePicker Grid.Row="3" Grid.Column="1" 
+                        Width="150" Margin="5"
+                        Visibility="{Binding IsDatePickerNeeded, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                        SelectedDate="{Binding Deadline}"
+                        Text="Select your input deadline"/>
+
         </Grid>
         
     </Border>
