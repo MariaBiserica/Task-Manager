@@ -28,6 +28,34 @@ namespace Task_Manager.Commands
         {
             return true;
         }
+        //public void Execute(object parameter)
+        //{
+        //    string[] categories = _categorySet.Categories.ToArray();
+        //    MessageBox.Show("Current categories:\n" + string.Join("\n", categories), "Categories", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        //    // Display a message box to ask the user if they want to add a new category to the enum TaskCategory type.
+        //    MessageBoxResult result = MessageBox.Show("Do you want to add a new category?", "Add Category", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+        //    if (result == MessageBoxResult.Yes)
+        //    {
+        //        // Get the name of the new category from the user.
+        //        string newCategory = Interaction.InputBox("Enter the name of the new category:", "Add Category");
+
+        //        // If the category isn't already part of the TaskCategory.Categories, add it.
+        //        if (!categories.Contains(newCategory))
+        //        {
+        //            _categorySet.AddCategory(newCategory);
+        //            MessageBox.Show("Category added successfully.", "Add Category", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Category already exists.", "Add Category", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        }
+
+        //    }
+
+
+        //}
 
         public void Execute(object parameter)
         {

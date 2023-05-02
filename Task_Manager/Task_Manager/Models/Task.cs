@@ -125,7 +125,7 @@ namespace Task_Manager.Models
         {
             Work,
             School,
-            Home, 
+            Home,
             Other
         }
     }

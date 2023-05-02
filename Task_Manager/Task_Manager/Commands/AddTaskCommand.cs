@@ -62,7 +62,7 @@ namespace Task_Manager.Commands
             //_viewModel.IsDatePickerNeeded = true;
             //_viewModel.NotifyPropertyChanged("IsDatePickerNeeded");
             //DateTime deadline = _viewModel.Deadline;
-            
+
 
             string[] categories = Enum.GetNames(typeof(TaskCategory));
             string category = Interaction.InputBox("Enter a category:\n" + string.Join("\n", categories), "Add Category", "");

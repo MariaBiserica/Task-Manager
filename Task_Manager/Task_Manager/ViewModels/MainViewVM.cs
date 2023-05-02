@@ -46,6 +46,7 @@ namespace Task_Manager.ViewModels
             SortCommand = new SortCommand();
             FilterCommand = new FilterCommand(this);
             HelpCommand = new HelpCommand();
+            CloseWindowCommand = new CloseWindowCommand();
         }
         public DataModelVM Data { get; set; }
 
@@ -227,6 +228,8 @@ namespace Task_Manager.ViewModels
         public ICommand StatisticsCommand => new RelayCommand(obj => IsStatisticsPanelVisible = true);
 
         public ICommand HelpCommand { get; set; }
+
+        public ICommand CloseWindowCommand { get; set; }
 
     }
 }

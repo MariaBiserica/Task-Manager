@@ -85,6 +85,7 @@
     <Compile Include="Commands\AddTDLCommand.cs" />
     <Compile Include="Commands\ChangePathCommand.cs" />
     <Compile Include="Commands\CloseDatabaseCommand.cs" />
+    <Compile Include="Commands\CloseWindowCommand.cs" />
     <Compile Include="Commands\DeleteTaskCommand.cs" />
     <Compile Include="Commands\DeleteTDLCommand.cs" />
     <Compile Include="Commands\EditTaskCommand.cs" />

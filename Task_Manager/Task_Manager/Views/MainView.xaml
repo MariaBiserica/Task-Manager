@@ -92,6 +92,13 @@
                     <MenuItem Header="About" Command="{Binding HelpCommand}"/>
                 </MenuItem>
             </Menu>
+            <Button Grid.Row="0" Grid.Column="1" Width="Auto" Height="37" Margin="20" 
+                    HorizontalAlignment="Right" BorderBrush="Transparent" Background="Transparent"
+                    Command="{Binding CloseWindowCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" >
+                <Image Source="../Resources/Icons/power.png"/>
+            </Button>
+
 
             <Border CornerRadius="0, 30, 30, 0" Grid.Row="1" Background="White">
                 <TreeView x:Name="treeView" Background="Transparent" BorderBrush="Transparent" 
