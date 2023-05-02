@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Task_Manager.Models;
 using Task_Manager.ViewModels;
@@ -29,6 +30,20 @@ namespace Task_Manager.Commands
         {
             // Collect input from the user
             string name = Interaction.InputBox("Enter TDL Name", "Add TDL", "");
+
+            // Check if name already exists
+            bool nameExists = _viewModel.Data.ItemsCollection
+                .Concat(_viewModel.Data.ItemsCollection.SelectMany(t => t.SubCollection))
+                .Any(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+            // Check if the name already exists
+            if (_viewModel.Data.ItemsCollection.Any(tdl => tdl.Name == name) ||
+                _viewModel.Data.ItemsCollection.Any(tdl => tdl.SubCollection.Any(subTDL => subTDL.Name == name)))
+            {
+                MessageBox.Show("A TDL with the same name already exists.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                return;
+            }
+
             // Allow user to choose icon
             string iconPath = string.Empty;
             var openFileDialog = new OpenFileDialog();

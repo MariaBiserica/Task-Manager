@@ -68,12 +68,12 @@
                 </MenuItem>
                 <MenuItem Header="Task">
                     <MenuItem Header="Add" Command="{Binding AddTaskCommand}"/>
-                    <MenuItem Header="Edit"/>
-                    <MenuItem Header="Delete"/>
-                    <MenuItem Header="Set Done"/>
-                    <MenuItem Header="Move Up"/>
-                    <MenuItem Header="Move Down"/>
-                    <MenuItem Header="Manage Category"/>
+                    <MenuItem Header="Edit" Command="{Binding EditTaskCommand}"/>
+                    <MenuItem Header="Delete" Command="{Binding DeleteTaskCommand}"/>
+                    <MenuItem Header="Set Done" Command="{Binding SetDoneCommand}"/>
+                    <MenuItem Header="Move Up" Command="{Binding MoveUpTaskCommand}"/>
+                    <MenuItem Header="Move Down" Command="{Binding MoveDownTaskCommand}"/>
+                    <MenuItem Header="Manage Category" Command="{Binding ManageCategoryCommand}"/>
                     <MenuItem Header="Find Task"/>
                 </MenuItem>
                 <MenuItem Header="View">
@@ -123,6 +123,15 @@
                           ItemsSource="{Binding SelectedTDL.Tasks}"
                           SelectedItem="{Binding SelectedTask}"
                           SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="Done">
+                                    <Setter Property="Background" Value="LightGreen" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"/>

@@ -102,7 +102,7 @@ namespace Task_Manager.Models
                 if (_category != value)
                 {
                     _category = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("Category");
                 }
             }
         }

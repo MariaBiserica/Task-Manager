@@ -37,6 +37,12 @@ namespace Task_Manager.ViewModels
             MoveDownCommand = new MoveDownCommand(this);
             ChangePathCommand = new ChangePathCommand(this);
             AddTaskCommand = new AddTaskCommand(this);
+            EditTaskCommand = new EditTaskCommand();
+            DeleteTaskCommand = new DeleteTaskCommand(this);
+            SetDoneCommand = new SetDoneCommand(this);
+            MoveUpTaskCommand = new MoveUpTaskCommand(this);
+            MoveDownTaskCommand = new MoveDownTaskCommand(this);
+            ManageCategoryCommand = new ManageCategoryCommand(this);
             SortCommand = new SortCommand();
             FilterCommand = new FilterCommand(this);
             HelpCommand = new HelpCommand();
@@ -201,6 +207,18 @@ namespace Task_Manager.ViewModels
         public ICommand ChangePathCommand { get; set; }
 
         public ICommand AddTaskCommand { get; set; }
+
+        public ICommand EditTaskCommand { get; set; }
+
+        public ICommand DeleteTaskCommand { get; set; }
+
+        public ICommand SetDoneCommand { get; set; }
+
+        public ICommand MoveUpTaskCommand { get; set; }
+
+        public ICommand MoveDownTaskCommand { get; set; }
+
+        public ICommand ManageCategoryCommand { get; set; }
 
         public ICommand SortCommand { get; set; }
 
