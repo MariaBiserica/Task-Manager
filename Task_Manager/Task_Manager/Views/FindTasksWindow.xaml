@@ -1,0 +1,29 @@
+﻿<Window x:Class="Task_Manager.Views.FindTasksWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task_Manager.Views"
+        mc:Ignorable="d"
+        Title="FindTasksWindow" Height="300" Width="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Search:" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Width="200" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="Search" Margin="5" Command="{Binding SearchCommand}"/>
+        <CheckBox Grid.Row="0" Grid.Column="3" Content="Search in current view only" Margin="5" IsChecked="{Binding SearchInCurrentViewOnly}"/>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Margin="5" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

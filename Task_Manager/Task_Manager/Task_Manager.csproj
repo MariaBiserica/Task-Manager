@@ -69,6 +69,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FindTasksWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,6 +90,7 @@
     <Compile Include="Commands\EditTaskCommand.cs" />
     <Compile Include="Commands\EditTDLCommand.cs" />
     <Compile Include="Commands\FilterCommand.cs" />
+    <Compile Include="Commands\FindTasksCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\LoadDatabaseCommand.cs" />
     <Compile Include="Commands\ManageCategoryCommand.cs" />
@@ -102,10 +107,14 @@
     <Compile Include="Resources\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Resources\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="ViewModels\DataModelVM.cs" />
+    <Compile Include="ViewModels\FindTasksWindowVM.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\MainViewVM.cs" />
     <Compile Include="ViewModels\StatisticsVM.cs" />
+    <Compile Include="Views\FindTasksWindow.xaml.cs">
+      <DependentUpon>FindTasksWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
