@@ -41,9 +41,19 @@
             <TextBlock Text="Task Manager"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
-                   Foreground="White"
                    FontSize="22"
-                   Margin="20, 0, 0, 0"/>
+                   FontWeight="ExtraBold"
+                   Margin="20, 0, 0, 0">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7" >
+                        <GradientStop  Color="{StaticResource title1}" Offset="0" />
+                        <GradientStop  Color="{StaticResource title2}" Offset="1" />
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="2" Color="Black"/>
+                </TextBlock.Effect>
+            </TextBlock>
 
             <Menu Grid.Column="1" Background="Transparent" FontWeight="ExtraBold" FontSize="20">
                 <Menu.Foreground>
