@@ -93,8 +93,8 @@ namespace Task_Manager.Models
             }
         }
 
-        private string _category;
-        public string Category
+        private TaskCategory _category;
+        public TaskCategory Category
         {
             get { return _category; }
             set
@@ -119,6 +119,14 @@ namespace Task_Manager.Models
             Low,
             Medium,
             High
+        }
+
+        public enum TaskCategory
+        {
+            Work,
+            School,
+            Home, 
+            Other
         }
     }
 }

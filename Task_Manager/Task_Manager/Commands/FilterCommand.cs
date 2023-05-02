@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Task_Manager.Models;
 using Task_Manager.ViewModels;
+using static Task_Manager.Models.Task;
 using static Task_Manager.ViewModels.MainViewVM;
 using Task = Task_Manager.Models.Task;
 using TaskStatus = Task_Manager.Models.Task.TaskStatus;
@@ -39,20 +41,34 @@ namespace Task_Manager.Commands
             {
                 case FilterType.Category:
                     _viewModel.SelectedTDL.Tasks = new ObservableCollection<Task>(_viewModel.OriginalTasks);
-                    string input = Microsoft.VisualBasic.Interaction.InputBox("Enter category type", "Filter by Category", "");
-                    if (!string.IsNullOrEmpty(input))
+                    bool added = false;
+                    string[] categories = Enum.GetNames(typeof(TaskCategory));
+                    string selectedCategory = Interaction.InputBox("Select a category", "Filter by category", "");
+                    ObservableCollection<Task> filteredTasks = new ObservableCollection<Task>();
+                    foreach (var task in _viewModel.SelectedTDL.Tasks)
                     {
-                        ObservableCollection<Task> filteredTasks = new ObservableCollection<Task>();
-                        foreach (var task in _viewModel.SelectedTDL.Tasks)
+                        if (task.Category.ToString() == selectedCategory)
                         {
-                            if (task.Category == input)
-                            {
-                                filteredTasks.Add(task);
-                            }
+                            filteredTasks.Add(task);
+                            added = true;
                         }
-                        _viewModel.SelectedTDL.Tasks = filteredTasks;
-                        _viewModel.NotifyPropertyChanged("SelectedTDL");
                     }
+                    if (added)
+                    {
+                        _viewModel.SelectedTDL.Tasks = filteredTasks;
+                    }
+                    else
+                    {
+                        if (categories.Contains(selectedCategory))
+                        {
+                            MessageBox.Show("No tasks with that category", "Filter by category", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid category!\nThe valid categories are:\n*Work\n*School\n*Home\n*Other", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    _viewModel.NotifyPropertyChanged("SelectedTDL");
                     break;
                 case FilterType.Done:
                     _viewModel.SelectedTDL.Tasks = new ObservableCollection<Task>(_viewModel.OriginalTasks);

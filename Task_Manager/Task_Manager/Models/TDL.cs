@@ -34,6 +34,18 @@ namespace Task_Manager.Models
             }
         }
 
-        public string Icon { get; set; }
+        private string _icon;
+        public string Icon
+        {
+            get { return _icon; }
+            set
+            {
+                if (_icon != value)
+                {
+                    _icon = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
     }
 }

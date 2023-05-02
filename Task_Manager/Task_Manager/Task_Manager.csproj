@@ -76,10 +76,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\AddTDLCommand.cs" />
+    <Compile Include="Commands\ChangePathCommand.cs" />
     <Compile Include="Commands\CloseDatabaseCommand.cs" />
+    <Compile Include="Commands\DeleteTDLCommand.cs" />
+    <Compile Include="Commands\EditTDLCommand.cs" />
     <Compile Include="Commands\FilterCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\LoadDatabaseCommand.cs" />
+    <Compile Include="Commands\MoveDownCommand.cs" />
+    <Compile Include="Commands\MoveUpCommand.cs" />
     <Compile Include="Commands\NewDatabaseCommand.cs" />
     <Compile Include="Commands\SaveDatabaseCommand.cs" />
     <Compile Include="Commands\SortCommand.cs" />

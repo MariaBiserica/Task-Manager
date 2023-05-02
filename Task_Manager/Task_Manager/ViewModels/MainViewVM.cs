@@ -29,6 +29,12 @@ namespace Task_Manager.ViewModels
             LoadDatabaseCommand = new LoadDatabaseCommand(this);
             SaveDatabaseCommand = new SaveDatabaseCommand(this);
             CloseDatabaseCommand = new CloseDatabaseCommand(this);
+            AddTDLCommand = new AddTDLCommand(this);
+            EditTDLCommand = new EditTDLCommand(this);
+            DeleteTDLCommand = new DeleteTDLCommand(this);
+            MoveUpCommand = new MoveUpCommand(this);
+            MoveDownCommand = new MoveDownCommand(this);
+            ChangePathCommand = new ChangePathCommand(this);
             SortCommand = new SortCommand();
             FilterCommand = new FilterCommand(this);
             HelpCommand = new HelpCommand();
@@ -151,6 +157,18 @@ namespace Task_Manager.ViewModels
         public ICommand SaveDatabaseCommand { get; set; }
 
         public ICommand CloseDatabaseCommand { get; set; }
+
+        public ICommand AddTDLCommand { get; set; }
+
+        public ICommand EditTDLCommand { get; set; }
+
+        public ICommand DeleteTDLCommand { get; set; }
+
+        public ICommand MoveUpCommand { get; set; }
+
+        public ICommand MoveDownCommand { get; set; }
+
+        public ICommand ChangePathCommand { get; set; }
 
         public ICommand SortCommand { get; set; }
 

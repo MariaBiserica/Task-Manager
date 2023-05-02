@@ -59,13 +59,12 @@
                     <MenuItem Header="Exit" Command="{Binding CloseDatabaseCommand}"/>
                 </MenuItem>
                 <MenuItem Header="TDL">
-                    <MenuItem Header="Add Root TDL"/>
-                    <MenuItem Header="Add Sub-TDL"/>
-                    <MenuItem Header="Edit"/>
-                    <MenuItem Header="Delete"/>
-                    <MenuItem Header="Move Up"/>
-                    <MenuItem Header="Move Down"/>
-                    <MenuItem Header="Change Path"/>
+                    <MenuItem Header="Add TDL" Command="{Binding AddTDLCommand}"/>
+                    <MenuItem Header="Edit" Command="{Binding EditTDLCommand}"/>
+                    <MenuItem Header="Delete" Command="{Binding DeleteTDLCommand}"/>
+                    <MenuItem Header="Move Up" Command="{Binding MoveUpCommand}"/>
+                    <MenuItem Header="Move Down" Command="{Binding MoveDownCommand}"/>
+                    <MenuItem Header="Change Path" Command="{Binding ChangePathCommand}"/>
                 </MenuItem>
                 <MenuItem Header="Task">
                     <MenuItem Header="Add"/>
