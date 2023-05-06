@@ -11,22 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Task_Manager.Models;
+using Task_Manager.ViewModels;
 
 namespace Task_Manager.Views
 {
     /// <summary>
-    /// Interaction logic for FindTasksWindow.xaml
+    /// Interaction logic for ManageCategoriesView.xaml
     /// </summary>
-    public partial class FindTasksWindow : Window
+    public partial class ManageCategoriesView : Window
     {
-        public FindTasksWindow()
+        private TaskCategoryVM taskCategory;
+        public ManageCategoriesView()
         {
             InitializeComponent();
-        }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
+            // create instance of TaskCategoryVM and set as DataContext
+            taskCategory = new TaskCategoryVM();
+            DataContext = taskCategory;
         }
     }
 }

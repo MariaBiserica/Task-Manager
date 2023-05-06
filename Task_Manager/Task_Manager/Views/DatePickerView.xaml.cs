@@ -11,22 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Task_Manager.ViewModels;
 
 namespace Task_Manager.Views
 {
     /// <summary>
-    /// Interaction logic for FindTasksWindow.xaml
+    /// Interaction logic for DatePickerView.xaml
     /// </summary>
-    public partial class FindTasksWindow : Window
+    public partial class DatePickerView : Window
     {
-        public FindTasksWindow()
+        public DatePickerView()
         {
             InitializeComponent();
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Task_Manager.Models
                 if (_name != value)
                 {
                     _name = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("Name");
                 }
             }
         }
@@ -32,7 +32,7 @@ namespace Task_Manager.Models
                 if (_description != value)
                 {
                     _description = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("Description");
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace Task_Manager.Models
                 if (_status != value)
                 {
                     _status = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("Status");
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace Task_Manager.Models
                 if (_priority != value)
                 {
                     _priority = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("Priority");
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace Task_Manager.Models
                 if (_deadline != value)
                 {
                     _deadline = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("Deadline");
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace Task_Manager.Models
                 if (_completionDate != value)
                 {
                     _completionDate = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("CompletionDate");
                 }
             }
         }
@@ -121,12 +121,12 @@ namespace Task_Manager.Models
             High
         }
 
-        public enum TaskCategory
-        {
-            Work,
-            School,
-            Home,
-            Other
-        }
+        //public enum TaskCategory
+        //{
+        //    Work,
+        //    School,
+        //    Home,
+        //    Other
+        //}
     }
 }

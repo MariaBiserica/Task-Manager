@@ -6,13 +6,13 @@ using System.Windows;
 using System.Windows.Input;
 using Task_Manager.Core;
 using Task_Manager.Models;
+using System.Windows.Documents;
 
 namespace Task_Manager.ViewModels
 {
     public class FindTasksWindowVM : ObservableObject
     {
         private readonly MainViewVM _mainViewModel;
-        private string _searchText;
         private bool _isSearchInCurrentViewOnly;
 
         public FindTasksWindowVM(MainViewVM mainViewModel)
@@ -23,12 +23,24 @@ namespace Task_Manager.ViewModels
             TaskList = new ObservableCollection<Task>();
         }
 
+        private string _searchText;
         public string SearchText
         {
             get => _searchText;
             set
             {
                 _searchText = value;
+                NotifyPropertyChanged();
+            }
+        }
+        
+        private List<Task> _searchResults;
+        public List<Task> SearchResults
+        {
+            get => _searchResults;
+            set
+            {
+                _searchResults = value;
                 NotifyPropertyChanged();
             }
         }
@@ -52,21 +64,19 @@ namespace Task_Manager.ViewModels
         private void OnSearch(object obj)
         {
             var allTasks = new List<Task>();
-            CollectTasks(allTasks, _mainViewModel.Data.ItemsCollection);
+            allTasks = CollectTasks(allTasks, _mainViewModel.Data.ItemsCollection);
 
             if (IsSearchInCurrentViewOnly)
             {
                 allTasks = _mainViewModel.SelectedTDL.Tasks.ToList();
             }
-
+            
             var filteredTasks = allTasks.Where(t => t.Name.Contains(SearchText) ||
-                                                    t.Deadline.ToString("MM/dd/yyyy").Contains(SearchText))
-                                        .Select(t => new { t.Name, Location = FindParentTDL(t).Name });
-
-            //SearchResults = new ObservableCollection<dynamic>(filteredTasks);
+                                                    t.Deadline.ToString("MM/dd/yyyy").Contains(SearchText)).ToList();
+            SearchResults = new List<Task>(filteredTasks);
         }
 
-        private void CollectTasks(List<Task> tasks, ObservableCollection<TDL> collection)
+        private List<Task> CollectTasks(List<Task> tasks, ObservableCollection<TDL> collection)
         {
             foreach (var item in collection)
             {
@@ -76,6 +86,8 @@ namespace Task_Manager.ViewModels
                     tasks.AddRange(tdl.Tasks);
                 }
             }
+
+            return tasks;
         }
 
         private TDL FindParentTDL(Task task)

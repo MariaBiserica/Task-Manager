@@ -16,5 +16,12 @@ namespace Task_Manager.Core
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
+
+        public static void NotifyStaticPropertyChanged(string propertyName)
+        {
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

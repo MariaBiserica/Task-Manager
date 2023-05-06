@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\ManageCategoriesView.xaml.cs">
+      <DependentUpon>ManageCategoriesView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\Themes\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -66,6 +69,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Themes\UIColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DatePickerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,15 +111,21 @@
     <Compile Include="Commands\SetDoneCommand.cs" />
     <Compile Include="Commands\SortCommand.cs" />
     <Compile Include="Models\DataModel.cs" />
+    <Compile Include="Models\TaskCategory.cs" />
     <Compile Include="Models\TaskCollection.cs" />
     <Compile Include="Resources\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Resources\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="ViewModels\DataModelVM.cs" />
+    <Compile Include="ViewModels\DatePickerVM.cs" />
     <Compile Include="ViewModels\FindTasksWindowVM.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\MainViewVM.cs" />
     <Compile Include="ViewModels\StatisticsVM.cs" />
+    <Compile Include="ViewModels\TaskCategoryVM.cs" />
+    <Compile Include="Views\DatePickerView.xaml.cs">
+      <DependentUpon>DatePickerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FindTasksWindow.xaml.cs">
       <DependentUpon>FindTasksWindow.xaml</DependentUpon>
     </Compile>
@@ -120,6 +133,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ManageCategoriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Task.cs" />

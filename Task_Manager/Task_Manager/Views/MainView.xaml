@@ -84,7 +84,7 @@
                     <MenuItem Header="Move Up" Command="{Binding MoveUpTaskCommand}"/>
                     <MenuItem Header="Move Down" Command="{Binding MoveDownTaskCommand}"/>
                     <MenuItem Header="Manage Category" Command="{Binding ManageCategoryCommand}"/>
-                    <MenuItem Header="Find Task"/>
+                    <MenuItem Header="Find Task" Command="{Binding FindTasksCommand}"/>
                 </MenuItem>
                 <MenuItem Header="View">
                     <MenuItem Header="Sort" Command="{Binding SortCommand}"/>
@@ -181,12 +181,6 @@
                     <TextBlock Text="{Binding Statistics.NumTasksPending}" Foreground="Blue"/>
                 </StackPanel>
             </Border>
-
-            <DatePicker Grid.Row="3" Grid.Column="1" 
-                        Width="150" Margin="5"
-                        Visibility="{Binding IsDatePickerNeeded, Converter={StaticResource BooleanToVisibilityConverter}}" 
-                        SelectedDate="{Binding Deadline}"
-                        Text="Select your input deadline"/>
 
         </Grid>
         

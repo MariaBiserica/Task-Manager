@@ -42,7 +42,7 @@ namespace Task_Manager.Commands
                 case FilterType.Category:
                     _viewModel.SelectedTDL.Tasks = new ObservableCollection<Task>(_viewModel.OriginalTasks);
                     bool added = false;
-                    string[] categories = Enum.GetNames(typeof(TaskCategory));
+                    string[] categories = string.Join(",", TaskCategoryVM.Categories).Split(',');
                     string selectedCategory = Interaction.InputBox("Select a category", "Filter by category", "");
                     ObservableCollection<Task> filteredTasks = new ObservableCollection<Task>();
                     foreach (var task in _viewModel.SelectedTDL.Tasks)
@@ -65,7 +65,7 @@ namespace Task_Manager.Commands
                         }
                         else
                         {
-                            MessageBox.Show("Invalid category!\nThe valid categories are:\n*Work\n*School\n*Home\n*Other", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Invalid category!\nThe valid categories are:\n" + string.Join("\n", TaskCategoryVM.Categories), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     _viewModel.NotifyPropertyChanged("SelectedTDL");

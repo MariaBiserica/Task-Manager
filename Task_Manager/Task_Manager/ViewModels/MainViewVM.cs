@@ -24,7 +24,6 @@ namespace Task_Manager.ViewModels
         {
             Data = null;
             IsStatisticsPanelVisible = false;
-            IsDatePickerNeeded = false;
 
             NewDatabaseCommand = new NewDatabaseCommand();
             LoadDatabaseCommand = new LoadDatabaseCommand(this);
@@ -47,6 +46,7 @@ namespace Task_Manager.ViewModels
             FilterCommand = new FilterCommand(this);
             HelpCommand = new HelpCommand();
             CloseWindowCommand = new CloseWindowCommand();
+            FindTasksCommand = new FindTasksCommand(this);
         }
         public DataModelVM Data { get; set; }
 
@@ -59,11 +59,8 @@ namespace Task_Manager.ViewModels
             }
             set 
             {
-                if (selectedTDL != value)
-                {
-                    selectedTDL = value;
-                    NotifyPropertyChanged("SelectedTDL");
-                }
+                selectedTDL = value;
+                NotifyPropertyChanged("SelectedTDL");
             }
         }
 
@@ -157,35 +154,7 @@ namespace Task_Manager.ViewModels
             DueFuture,
             None
         }
-
-        private bool _isDatePickerNeeded;
-        public bool IsDatePickerNeeded
-        {
-            get { return _isDatePickerNeeded; }
-            set
-            {
-                if (_isDatePickerNeeded != value)
-                {
-                    _isDatePickerNeeded = value;
-                    NotifyPropertyChanged("IsDatePickerNeeded");
-                }
-            }
-        }
-
-        private DateTime _deadline;
-        public DateTime Deadline
-        {
-            get { return _deadline; }
-            set
-            {
-                if (_deadline != value)
-                {
-                    _deadline = value;
-                    NotifyPropertyChanged("Deadline");
-                }
-            }
-        }
-
+        
 
         public ICommand NewDatabaseCommand { get; set; }
        
@@ -230,6 +199,8 @@ namespace Task_Manager.ViewModels
         public ICommand HelpCommand { get; set; }
 
         public ICommand CloseWindowCommand { get; set; }
+
+        public ICommand FindTasksCommand { get; set; }
 
     }
 }

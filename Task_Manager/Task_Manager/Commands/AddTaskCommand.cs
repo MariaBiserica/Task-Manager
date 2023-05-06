@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +9,12 @@ using Task_Manager.ViewModels;
 using Task = Task_Manager.Models.Task;
 using TaskStatus = Task_Manager.Models.Task.TaskStatus;
 using TaskPriority = Task_Manager.Models.Task.TaskPriority;
-using TaskCategory = Task_Manager.Models.Task.TaskCategory;
+using TaskCategory = Task_Manager.Models.TaskCategory;
 using System.Collections.ObjectModel;
+using Microsoft.VisualBasic;
+using System.Windows.Controls;
+using Task_Manager.Views;
+using Task_Manager.Models;
 
 namespace Task_Manager.Commands
 {
@@ -58,20 +61,30 @@ namespace Task_Manager.Commands
                 return;
             }
 
-            //// Use a DatePicker control to select the deadline
-            //_viewModel.IsDatePickerNeeded = true;
-            //_viewModel.NotifyPropertyChanged("IsDatePickerNeeded");
-            //DateTime deadline = _viewModel.Deadline;
+            DatePickerVM datePickerVM = new DatePickerVM();
+            DatePickerView datePickerView = new DatePickerView
+            {
+                DataContext = datePickerVM
+            };
+            datePickerView.ShowDialog();
+            DateTime deadline = datePickerVM.SelectedDate;
 
+            //string[] categories = Enum.GetNames(typeof(TaskCategory));
+            //string category = Interaction.InputBox("Enter a category:\n" + string.Join("\n", categories), "Add Category", "");
+            //if (!categories.Contains(category) || string.IsNullOrEmpty(category))
+            //{
+            //    MessageBox.Show("Invalid category!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
 
-            string[] categories = Enum.GetNames(typeof(TaskCategory));
-            string category = Interaction.InputBox("Enter a category:\n" + string.Join("\n", categories), "Add Category", "");
-            if (!categories.Contains(category) || string.IsNullOrEmpty(category))
+            string inputCategory = Interaction.InputBox("Enter a category:\n" + string.Join("\n", TaskCategoryVM.Categories), "Add Category", "");
+            // Find the TaskCategory object that corresponds to the selected category name
+            TaskCategory category = TaskCategoryVM.Categories.FirstOrDefault(c => c.Name == inputCategory);
+            if (category == null)
             {
                 MessageBox.Show("Invalid category!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
 
             Task newTask = new Task
             {
@@ -79,10 +92,10 @@ namespace Task_Manager.Commands
                 Description = description,
                 Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), status),
                 Priority = (TaskPriority)Enum.Parse(typeof(TaskPriority), priority),
-                // Deadline = deadline,
-                Deadline = DateTime.Now.AddDays(5),
+                Deadline = deadline,
                 CompletionDate = DateTime.MaxValue,
-                Category = (TaskCategory)Enum.Parse(typeof(TaskCategory), category)
+                //Category = (TaskCategory)Enum.Parse(typeof(TaskCategory), category)                
+                Category = category
             };
 
             _viewModel.SelectedTDL.Tasks.Add(newTask);
