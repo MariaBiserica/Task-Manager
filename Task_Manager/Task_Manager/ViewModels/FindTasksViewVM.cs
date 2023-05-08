@@ -87,12 +87,12 @@ namespace Task_Manager.ViewModels
                 allTasks = _mainViewModel.SelectedTDL.Tasks.ToList();
             }
 
-            var filteredTasks = allTasks.Where(t => t.Name.Contains(SearchByName) ||
+            var filteredTasks = allTasks.Where(t => t.Name.Equals(SearchByName) ||
                                                     t.Deadline == SelectedDate).ToList();
 
             foreach (var task in filteredTasks)
             {
-                task.Location = FindLocation(task);
+                task.Location = GetTDLPath(task);
             }
 
             SearchResults = new ObservableCollection<Task>(filteredTasks);
@@ -112,32 +112,52 @@ namespace Task_Manager.ViewModels
             return tasks;
         }
 
-        private string FindLocation(Task task)
+        private string GetTDLPath(Task task)
         {
-            string path = "";
-            
+            // Try to find the task in the top-level TDLs
             foreach (var tdl in _mainViewModel.Data.ItemsCollection)
             {
-                path = tdl.Name;
-                
                 if (tdl.Tasks.Contains(task))
                 {
-                    return path;
+                    return tdl.Name + ">>" + task.Name;
                 }
                 else
                 {
-                    foreach (var subCollection in tdl.SubCollection)
+                    // If the task is not in the top-level TDLs, check the sub-collections
+                    string path = GetSubCollectionTDLPath(task, tdl.SubCollection, tdl.Name);
+                    if (path != null)
                     {
-                        if (subCollection.Tasks.Contains(task))
-                        {
-                            path += ">>" + subCollection.Name;
-                            return path;
-                        }
+                        return path + ">>" + task.Name;
                     }
                 }
             }
 
-            return path;
+            // Task not found in any TDL
+            return null;
+        }
+
+        private string GetSubCollectionTDLPath(Task task, ObservableCollection<TDL> subCollection, string parentName)
+        {
+            // Try to find the task in the sub-collection
+            foreach (var tdl in subCollection)
+            {
+                if (tdl.Tasks.Contains(task))
+                {
+                    return parentName + ">>" + tdl.Name;
+                }
+                else
+                {
+                    // If the task is not in the sub-collection, check its sub-collections (if any)
+                    string path = GetSubCollectionTDLPath(task, tdl.SubCollection, parentName + ">>" + tdl.Name);
+                    if (path != null)
+                    {
+                        return path;
+                    }
+                }
+            }
+
+            // Task not found in any sub-collection
+            return null;
         }
 
         private void OnCancel(object obj)

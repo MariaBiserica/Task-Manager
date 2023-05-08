@@ -22,11 +22,6 @@ namespace Task_Manager.ViewModels
         public TaskCategoryVM()
         {
             SelectedCategory = "";
-            //Categories = new ObservableCollection<TaskCategory>();
-            //Categories.Add(TaskCategory.Work);
-            //Categories.Add(TaskCategory.School);
-            //Categories.Add(TaskCategory.Home);
-            //Categories.Add(TaskCategory.Other);
         }
 
         private static ObservableCollection<TaskCategory> _categories = new ObservableCollection<TaskCategory>()
@@ -46,17 +41,6 @@ namespace Task_Manager.ViewModels
                 NotifyStaticPropertyChanged(nameof(Categories));
             }
         }
-
-        //private ObservableCollection<TaskCategory> _categories;
-        //public ObservableCollection<TaskCategory> Categories
-        //{
-        //    get { return _categories; }
-        //    set
-        //    {
-        //        _categories = value;
-        //        NotifyPropertyChanged(nameof(Categories));
-        //    }
-        //}
 
         private string _selectedCategory;
         public string SelectedCategory

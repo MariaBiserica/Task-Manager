@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
+using Task_Manager.Models;
 using Task_Manager.ViewModels;
 
 namespace Task_Manager.Commands
@@ -35,19 +38,46 @@ namespace Task_Manager.Commands
                 }
                 else
                 {
-                    foreach (var tdl in _viewModel.Data.ItemsCollection)
+                    bool deleted = false;
+                    DeleteTDLRecursive(_viewModel.Data.ItemsCollection, _viewModel.SelectedTDL, ref deleted);
+                    if (deleted)
                     {
-                        if (tdl.SubCollection.Contains(_viewModel.SelectedTDL))
-                        {
-                            tdl.SubCollection.Remove(_viewModel.SelectedTDL);
-                            break;
-                        }
+                        MessageBox.Show("TDL deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("TDL not found!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select a TDL to delete.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         public event EventHandler CanExecuteChanged;
+
+        private void DeleteTDLRecursive(ObservableCollection<TDL> collection, TDL tdl, ref bool deleted)
+        {
+            if (collection.Contains(tdl))
+            {
+                collection.Remove(tdl);
+                deleted = true;
+                return;
+            }
+            else
+            {
+                foreach (var subCollection in collection)
+                {
+                    DeleteTDLRecursive(subCollection.SubCollection, tdl, ref deleted);
+                    if (deleted)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
     }
 
 }

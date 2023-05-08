@@ -69,16 +69,7 @@ namespace Task_Manager.Commands
             datePickerView.ShowDialog();
             DateTime deadline = datePickerVM.SelectedDate;
 
-            //string[] categories = Enum.GetNames(typeof(TaskCategory));
-            //string category = Interaction.InputBox("Enter a category:\n" + string.Join("\n", categories), "Add Category", "");
-            //if (!categories.Contains(category) || string.IsNullOrEmpty(category))
-            //{
-            //    MessageBox.Show("Invalid category!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}
-
             string inputCategory = Interaction.InputBox("Enter a category:\n" + string.Join("\n", TaskCategoryVM.Categories), "Add Category", "");
-            // Find the TaskCategory object that corresponds to the selected category name
             TaskCategory category = TaskCategoryVM.Categories.FirstOrDefault(c => c.Name == inputCategory);
             if (category == null)
             {
@@ -93,8 +84,7 @@ namespace Task_Manager.Commands
                 Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), status),
                 Priority = (TaskPriority)Enum.Parse(typeof(TaskPriority), priority),
                 Deadline = deadline,
-                CompletionDate = DateTime.MaxValue,
-                //Category = (TaskCategory)Enum.Parse(typeof(TaskCategory), category)                
+                CompletionDate = DateTime.MaxValue,              
                 Category = category
             };
 

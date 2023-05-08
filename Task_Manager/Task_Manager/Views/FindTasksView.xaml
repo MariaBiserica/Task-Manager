@@ -39,6 +39,7 @@
         <DataGrid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" Margin="5" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline, StringFormat={}{0:dd/MM/yyyy}}"/>
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>
             </DataGrid.Columns>
         </DataGrid>
