@@ -10,12 +10,11 @@ using System.Windows.Documents;
 
 namespace Task_Manager.ViewModels
 {
-    public class FindTasksWindowVM : ObservableObject
+    public class FindTasksViewVM : ObservableObject
     {
         private readonly MainViewVM _mainViewModel;
-        private bool _isSearchInCurrentViewOnly;
 
-        public FindTasksWindowVM(MainViewVM mainViewModel)
+        public FindTasksViewVM(MainViewVM mainViewModel)
         {
             _mainViewModel = mainViewModel;
             SearchCommand = new RelayCommand(OnSearch);
@@ -23,35 +22,47 @@ namespace Task_Manager.ViewModels
             TaskList = new ObservableCollection<Task>();
         }
 
-        private string _searchText;
-        public string SearchText
+        private string _searchByName;
+        public string SearchByName
         {
-            get => _searchText;
+            get { return _searchByName; }
             set
             {
-                _searchText = value;
-                NotifyPropertyChanged();
-            }
-        }
-        
-        private List<Task> _searchResults;
-        public List<Task> SearchResults
-        {
-            get => _searchResults;
-            set
-            {
-                _searchResults = value;
-                NotifyPropertyChanged();
+                _searchByName = value;
+                NotifyPropertyChanged("SearchByName");
             }
         }
 
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
+        {
+            get { return _selectedDate; }
+            set
+            {
+                _selectedDate = value;
+                NotifyPropertyChanged("SelectedDate");
+            }
+        }
+
+        private ObservableCollection<Task> _searchResults;
+        public ObservableCollection<Task> SearchResults
+        {
+            get { return _searchResults; }
+            set
+            {
+                _searchResults = value;
+                NotifyPropertyChanged("SearchResults");
+            }
+        }
+
+        private bool _isSearchInCurrentViewOnly;
         public bool IsSearchInCurrentViewOnly
         {
             get => _isSearchInCurrentViewOnly;
             set
             {
                 _isSearchInCurrentViewOnly = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged("IsSearchInCurrentViewOnly");
             }
         }
 
@@ -66,14 +77,25 @@ namespace Task_Manager.ViewModels
             var allTasks = new List<Task>();
             allTasks = CollectTasks(allTasks, _mainViewModel.Data.ItemsCollection);
 
+            if (SearchByName == null)
+            {
+                SearchByName = "";
+            }
+
             if (IsSearchInCurrentViewOnly)
             {
                 allTasks = _mainViewModel.SelectedTDL.Tasks.ToList();
             }
-            
-            var filteredTasks = allTasks.Where(t => t.Name.Contains(SearchText) ||
-                                                    t.Deadline.ToString("MM/dd/yyyy").Contains(SearchText)).ToList();
-            SearchResults = new List<Task>(filteredTasks);
+
+            var filteredTasks = allTasks.Where(t => t.Name.Contains(SearchByName) ||
+                                                    t.Deadline == SelectedDate).ToList();
+
+            foreach (var task in filteredTasks)
+            {
+                task.Location = FindLocation(task);
+            }
+
+            SearchResults = new ObservableCollection<Task>(filteredTasks);
         }
 
         private List<Task> CollectTasks(List<Task> tasks, ObservableCollection<TDL> collection)
@@ -90,13 +112,17 @@ namespace Task_Manager.ViewModels
             return tasks;
         }
 
-        private TDL FindParentTDL(Task task)
+        private string FindLocation(Task task)
         {
+            string path = "";
+            
             foreach (var tdl in _mainViewModel.Data.ItemsCollection)
             {
+                path = tdl.Name;
+                
                 if (tdl.Tasks.Contains(task))
                 {
-                    return tdl;
+                    return path;
                 }
                 else
                 {
@@ -104,13 +130,14 @@ namespace Task_Manager.ViewModels
                     {
                         if (subCollection.Tasks.Contains(task))
                         {
-                            return subCollection;
+                            path = subCollection.Name + ">>" + path;
+                            return path;
                         }
                     }
                 }
             }
 
-            return null; // Parent TDL not found
+            return path;
         }
 
         private void OnCancel(object obj)

@@ -4,14 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager.Views"
-        xmlns:vm="clr-namespace:Task_Manager.ViewModels"
+        xmlns:vm="clr-namespace:Task_Manager.ViewModels" d:DataContext="{d:DesignInstance Type=vm:FindTasksViewVM}"
         mc:Ignorable="d"
         Title="FindTasksWindow" Height="300" Width="600">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:MainViewVM/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -21,11 +22,16 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Search:" Margin="5"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Width="200" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Find by name:" FontWeight="Bold"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Width="200" 
+                 Text="{Binding SearchByName, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Find by deadline:" FontWeight="Bold"/>
+        <DatePicker Grid.Row="1" Grid.Column="1" Margin="5"
+                    SelectedDate="{Binding SelectedDate}"/>
         <Button Grid.Row="0" Grid.Column="2" Content="Search" Margin="5" Command="{Binding SearchCommand}"/>
-        <CheckBox Grid.Row="0" Grid.Column="3" Content="Search in current view only" Margin="5" IsChecked="{Binding SearchInCurrentViewOnly}" Checked="CheckBox_Checked"/>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="4" Margin="5" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
+        <Button Grid.Row="1" Grid.Column="2" Content="Cancel" Margin="5" Command="{Binding CancelCommand}"/>
+        <CheckBox Grid.Row="0" Grid.Column="3" Margin="5" Content="Search in current view only" VerticalAlignment="Center" IsChecked="{Binding IsSearchInCurrentViewOnly}"/>
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="4" Margin="5" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>

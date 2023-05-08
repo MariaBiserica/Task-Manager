@@ -154,7 +154,7 @@ namespace Task_Manager.ViewModels
             DueFuture,
             None
         }
-        
+
 
         public ICommand NewDatabaseCommand { get; set; }
        

@@ -107,6 +107,20 @@ namespace Task_Manager.Models
             }
         }
 
+        private string _location;
+        public string Location
+        {
+            get { return _location; }
+            set
+            {
+                if (_location != value)
+                {
+                    _location = value;
+                    NotifyPropertyChanged("Location");
+                }
+            }
+        }
+
         public enum TaskStatus
         {
             Created,
@@ -121,12 +135,5 @@ namespace Task_Manager.Models
             High
         }
 
-        //public enum TaskCategory
-        //{
-        //    Work,
-        //    School,
-        //    Home,
-        //    Other
-        //}
     }
 }

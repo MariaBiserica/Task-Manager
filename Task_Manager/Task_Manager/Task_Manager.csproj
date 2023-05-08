@@ -76,7 +76,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FindTasksWindow.xaml">
+    <Page Include="Views\FindTasksView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,7 +117,7 @@
     <Compile Include="Resources\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="ViewModels\DataModelVM.cs" />
     <Compile Include="ViewModels\DatePickerVM.cs" />
-    <Compile Include="ViewModels\FindTasksWindowVM.cs" />
+    <Compile Include="ViewModels\FindTasksViewVM.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\MainViewVM.cs" />
@@ -126,8 +126,8 @@
     <Compile Include="Views\DatePickerView.xaml.cs">
       <DependentUpon>DatePickerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FindTasksWindow.xaml.cs">
-      <DependentUpon>FindTasksWindow.xaml</DependentUpon>
+    <Compile Include="Views\FindTasksView.xaml.cs">
+      <DependentUpon>FindTasksView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>

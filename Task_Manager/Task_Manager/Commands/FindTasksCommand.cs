@@ -24,28 +24,11 @@ namespace Task_Manager.Commands
         {
             // Create the FindTasksWindow
             var window = new Views.FindTasksWindow();
-            var viewModel = new FindTasksWindowVM(_viewModel);
+            var viewModel = new FindTasksViewVM(_viewModel);
             window.DataContext = viewModel;
 
             // Show the FindTasksWindow as a dialog
             var result = window.ShowDialog();
-
-            //if (result == true)
-            //{
-            //    // Get the search text and the flag to indicate if the search should be performed only in the selected TDL
-            //    string searchText = viewModel.SearchText;
-            //    bool isSearchInCurrentViewOnly = viewModel.IsSearchInCurrentViewOnly;
-
-            //    // Perform the search
-
-            //    var searchResults = _viewModel.Data.ItemsCollection
-            //        .Where(tdl => !isSearchInCurrentViewOnly || tdl == _viewModel.SelectedTDL)
-            //        .SelectMany(tdl => tdl.Tasks)
-            //        .Where(task => task.Name.Contains(searchText) || task.Deadline.ToString().Contains(searchText)).ToList();
-
-            //    // Update the search results in the FindTasksWindow
-            //    viewModel.SearchResults = searchResults;
-            //}
         }
 
         public event EventHandler CanExecuteChanged;
