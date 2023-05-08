@@ -153,7 +153,7 @@
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Priority" Binding="{Binding Priority}"/>
                         <DataGridTextColumn Header="Type" Binding="{Binding Category}"/>
-                        <DataGridTextColumn Header="Due Date" Binding="{Binding Deadline}"/>
+                        <DataGridTextColumn Header="Due Date" Binding="{Binding Deadline, StringFormat={}{0:dd/MM/yyyy}}"/>
                         <DataGridTextColumn Header="Completion Date" Binding="{Binding CompletionDate}"/>
                     </DataGrid.Columns>
                 </DataGrid>

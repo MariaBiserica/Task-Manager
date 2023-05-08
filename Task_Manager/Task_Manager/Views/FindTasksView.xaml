@@ -6,12 +6,10 @@
         xmlns:local="clr-namespace:Task_Manager.Views"
         xmlns:vm="clr-namespace:Task_Manager.ViewModels" d:DataContext="{d:DesignInstance Type=vm:FindTasksViewVM}"
         mc:Ignorable="d"
-        Title="FindTasksWindow" Height="300" Width="600">
-    <!--<Window.DataContext>
-        <vm:MainViewVM/>
-    </Window.DataContext>-->
+        Title="Find Tasks" Height="300" Width="600">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -22,16 +20,23 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="Find by name:" FontWeight="Bold"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Width="200" 
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label Margin="5" Content="Find Tasks" FontSize="20" FontWeight="Bold"/>
+            <Label Content="Find Tasks in all to-do lists" />
+        </StackPanel>
+        <Image Grid.Row="0" Grid.Column="0" Source="../Resources/Icons/search2.png" Height="50" Width="50"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Find by name:" FontWeight="Bold"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Width="200" 
                  Text="{Binding SearchByName, UpdateSourceTrigger=PropertyChanged}"/>
-        <Label Grid.Row="1" Grid.Column="0" Margin="5" Content="Find by deadline:" FontWeight="Bold"/>
-        <DatePicker Grid.Row="1" Grid.Column="1" Margin="5"
+        <Label Grid.Row="2" Grid.Column="0" Margin="5" Content="Find by deadline:" FontWeight="Bold"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" Margin="5"
                     SelectedDate="{Binding SelectedDate}"/>
-        <Button Grid.Row="0" Grid.Column="2" Content="Search" Margin="5" Command="{Binding SearchCommand}"/>
-        <Button Grid.Row="1" Grid.Column="2" Content="Cancel" Margin="5" Command="{Binding CancelCommand}"/>
-        <CheckBox Grid.Row="0" Grid.Column="3" Margin="5" Content="Search in current view only" VerticalAlignment="Center" IsChecked="{Binding IsSearchInCurrentViewOnly}"/>
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="4" Margin="5" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
+        <Button Grid.Row="1" Grid.Column="2" Content="Search" Margin="5" Command="{Binding SearchCommand}"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="Cancel" Margin="5" Command="{Binding CancelCommand}"/>
+        <CheckBox Grid.Row="1" Grid.Column="3" Margin="5" Content="Search in current view only" VerticalAlignment="Center" IsChecked="{Binding IsSearchInCurrentViewOnly}"/>
+        <DataGrid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" Margin="5" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>

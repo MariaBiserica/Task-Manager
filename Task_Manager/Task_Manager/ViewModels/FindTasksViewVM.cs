@@ -130,7 +130,7 @@ namespace Task_Manager.ViewModels
                     {
                         if (subCollection.Tasks.Contains(task))
                         {
-                            path = subCollection.Name + ">>" + path;
+                            path += ">>" + subCollection.Name;
                             return path;
                         }
                     }
