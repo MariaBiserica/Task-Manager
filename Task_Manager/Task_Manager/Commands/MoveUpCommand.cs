@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using Task_Manager.Models;
@@ -42,25 +43,18 @@ namespace Task_Manager.Commands
             else
             {
                 // SelectedTDL is part of a SubCollection
+                bool found = false;
                 foreach (TDL parentTDL in _viewModel.Data.ItemsCollection)
                 {
-                    if (parentTDL.SubCollection.Contains(_viewModel.SelectedTDL))
+                    if (found)
                     {
-                        // Get index of SelectedTDL in parent TDL's SubCollection
-                        int index = parentTDL.SubCollection.IndexOf(_viewModel.SelectedTDL);
-                        // Check if SelectedTDL is not already at the top of SubCollection
-                        if (index > 0)
-                        {
-                            // Swap SelectedTDL with TDL above it in SubCollection
-                            parentTDL.SubCollection[index] = parentTDL.SubCollection[index - 1];
-                            parentTDL.SubCollection[index - 1] = _viewModel.SelectedTDL;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Cannot move TDL up any further.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
                         break;
                     }
+                    found = MoveUpRecursive(parentTDL.SubCollection, _viewModel.SelectedTDL);
+                }
+                if (!found)
+                {
+                    MessageBox.Show("Could not find TDL in data structure.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
@@ -71,5 +65,39 @@ namespace Task_Manager.Commands
         }
 
         public event EventHandler CanExecuteChanged;
+
+        private bool MoveUpRecursive(ObservableCollection<TDL> subCollection, TDL selectedTDL)
+        {
+            bool found = false;
+            for (int i = 0; i < subCollection.Count; i++)
+            {
+                TDL tdl = subCollection[i];
+                if (tdl == selectedTDL)
+                {
+                    // Check if TDL is not already at the top of SubCollection
+                    if (i > 0)
+                    {
+                        // Swap TDL with TDL above it in SubCollection
+                        subCollection[i] = subCollection[i - 1];
+                        subCollection[i - 1] = selectedTDL;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot move TDL up any further.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    found = true;
+                    break;
+                }
+                else if (tdl.SubCollection.Count > 0)
+                {
+                    found = MoveUpRecursive(tdl.SubCollection, selectedTDL);
+                    if (found)
+                    {
+                        break;
+                    }
+                }
+            }
+            return found;
+        }
     }
 }
